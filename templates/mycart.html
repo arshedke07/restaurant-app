@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="media">
+                {{range .Data}}
+                <div class="media-left">
+                    <img src="{{ .Picture }}" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ .Item }}</h4>
+                    <h6>{{ .Price }}</h6>
+                    <h6>{{ .Quantity }}</h6>
+                </div>
+                <hr>
+                {{ end }}
+            </div>
+        </div>
+        <div class="col-md-4" id="cardcontainer">
+            <div class="card float-right" style="width:300px">
+                <div class="card-body">
+                    <h4 class="card-title">Order Profile</h4>
+                    <h5 class="card-text">Order Total: {{ .OrderTotal }}</h5>
+                    <h5 class="card-text">Tax: {{ .Tax }}</h5>
+                    <h5 class="card-text">Grand Total: {{ .GrandTotal }}</h5>
+
+                    <!-- <form hx-post="/mycart/{{ .RestaurantId }}" hx-target="#cardcontainer" hx-trigger="click"
+                        hx-swap="innerHTML"> -->
+                    <form action="/mycart/{{ .RestaurantId }}" method="post">
+                        {{range .Address}}
+                        <label><input type="checkbox" name="address"
+                                value="{{ .Add1 }} {{ .Add2}} {{ .Add3 }} {{ .City }} {{ .State }} {{ .Pincode }}">{{
+                            .Add1 }} {{ .Add2}} {{ .Add3 }} {{ .City }} {{ .State }} {{ .Pincode }}</label>
+                        {{end}}
+                        <button class="btn btn-primary" type="submit">Place Order</button>
+                    </form>
+                    <!-- <button hx-post="/mycart/{{ .RestaurantId }}" hx-target="#container" hx-trigger="click"
+                        hx-swap="innerHTML">Place
+                        Order</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

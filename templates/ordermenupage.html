@@ -1,0 +1,73 @@
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {
+        height: 1500px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+        .sidenav {
+            height: auto;
+            padding: 15px;
+        }
+
+        .row.content {
+            height: auto;
+        }
+    }
+</style>
+<div class="container-fluid" id="bodycontainer">
+    <div class="row content">
+        <div class="col-md-3 sidenav">
+            <h4>Restaurant Name</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">item1</a></li>
+                <li><a href="#">item2</a></li>
+                <li><a href="#">item3</a></li>
+                <li><a href="#">item4</a></li>
+                <li><a href="#">item5</a></li>
+            </ul><br>
+        </div>
+
+        <div class="media">
+            <a href="/mycart/{{ .RestaurantId }}" class="btn btn-primary btn-lg pull-right" role="button">My
+                Cart</a>
+            {{range .Data}}
+            <div class="media-left">
+                <img src="{{ .Picture }}" class="media-object" style="width:120px">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ .ItemName }}</h4>
+                <p>₹{{ .Price }}</p>
+                <p>{{ .Quantity }}</p>
+                <p>{{ .Description }}</p>
+                <!-- <form action="/ordermenupage/{{ .RestaurantId }}" method="post"> -->
+                <form hx-post="/ordermenupage/{{ .RestaurantId }}" hx-target="#bodycontainer" hx-trigger="submit"
+                    hx-swap="innerHTML">
+                    <input type="hidden" name="itemname" value="{{ .ItemName }}">
+                    <input type="hidden" name="price" value="{{ .Price }}">
+                    <input type="hidden" name="quantity" value="{{ .Quantity }}">
+                    <input type="hidden" name="picture" value="{{ .Picture }}">
+                    <input type="hidden" name="restaurantid" value="{{ .RestaurantId }}">
+                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <hr>
+            {{end}}
+        </div>
+    </div>
+</div>

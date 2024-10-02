@@ -1,0 +1,16 @@
+<div class="media" id="bodyContainer">
+    {{range .Data}}
+    <div class="media-left">
+        <img src="{{ .Picture }}" class="media-object" style="width:100px">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">{{ .Name }}</h4>
+        <p>{{ .Add1 }}, {{ .Add2}}, {{ .City }}, {{ .State }}, {{ .Pincode }}</p><br>
+        <p>{{ .Description }}</p>
+        <!-- <a href="/ordermenupage/{{ .Id}}" class="btn btn-primary" role="button">Order</a> -->
+        <button class="btn-primary" hx-get="/ordermenupage/{{ .Id }}" hx-trigger="click" hx-target="#bodyContainer"
+            hx-swap="outerHTML">Order</button>
+    </div>
+    <hr>
+    {{ end }}
+</div>

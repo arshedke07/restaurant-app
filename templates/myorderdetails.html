@@ -1,0 +1,22 @@
+<div class="col-md-9">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Data}}
+            <tr>
+                <td>{{ .Id }}</td>
+                <td>{{ .Item }}</td>
+                <td>{{ .Quantity }}</td>
+                <td>{{ .Price }}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>

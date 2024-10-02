@@ -1,0 +1,24 @@
+<div class="col-md-4">
+    <div class="card float-right" style="width:300px">
+        <div class="card-body">
+            <h4 class="card-title">Order Profile</h4>
+            <h5 class="card-text">Order Total: {{ .Price }}</h5>
+            <h5 class="card-text">Tax: {{ .Tax }}</h5>
+            <h5 class="card-text">Grand Total: {{ .Total }}</h5>
+            <h5 class="card-text">Address: {{ .Address }}</h5>
+            <div class="checkbox">
+                <label><input type="checkbox" name="creditcard">Pay By Credit Card</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="debitcard">Pay By Debit Card</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="upi">Pay By UPI</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="cod">Cash On Delivery</label>
+            </div>
+            <a href="#" class="btn btn-primary">Pay</a>
+        </div>
+    </div>
+</div>

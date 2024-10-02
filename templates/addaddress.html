@@ -1,0 +1,32 @@
+<form action="/addaddress/{{ .Data.Id }}" method="post">
+    <div class="form-group">
+        <label for="add1">Address 1</label>
+        <input type="text" class="form-control" id="add1" name="add1" placeholder="Enter Address">
+    </div>
+    <div class="form-group">
+        <label for="add2">Address 2</label>
+        <input type="text" class="form-control" id="add2" name="add2" placeholder="Enter Address">
+    </div>
+    <div class="form-group">
+        <label for="add3">Address 3</label>
+        <input type="text" class="form-control" id="add3" name="add3" placeholder="Enter Address">
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+    </div>
+    <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" class="form-control" id="state" name="state" placeholder="Enter State">
+    </div>
+    <div class="form-group">
+        <label for="pincode">Pincode</label>
+        <input type="number" class="form-control" id="pincode" name="pincode" placeholder="Enter Pincode">
+    </div>
+    <input type="hidden" name="userid" id="userid" value="{{ .Data.Id }}" />
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+<p>
+    After you have registered you will be redirected to the home page where you must login using your registered login
+    credentials
+</p>
