@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"fmt"
+
 	"github.com/arshedke07/restaurant-app/model"
 	"github.com/arshedke07/restaurant-app/services"
 	"github.com/gofiber/fiber/v2"
@@ -18,24 +20,28 @@ type AddAddressRoute struct {
 	Store       *session.Store
 }
 
-func NewAddressRoute(service services.IAddressService, store *session.Store) IAddUserAddressRoute {
+func NewAddressRoute(service services.IAddressService, store *session.Store, findService services.ILoginService) IAddUserAddressRoute {
 	return AddAddressRoute{
-		Service: service,
-		Store:   store,
+		Service:     service,
+		Store:       store,
+		FindService: findService,
 	}
 }
 
 func (route AddAddressRoute) AddUserAddress(c *fiber.Ctx) error {
-	id := c.Params("id")
+	// id := c.Params("id")
 	sess, _ := route.Store.Get(c)
+	id := sess.Get("ID")
+	str := fmt.Sprintf("%v", id)
 	if c.Method() == "GET" {
-		data, err := route.FindService.FindUserById(id)
+		data, err := route.FindService.FindUserById(str)
 		if err != nil {
 			return err
 		}
 		return c.Render("addaddress", fiber.Map{
-			"Title": "Register User",
-			"Data":  data,
+			"Title":    "Register User",
+			"UserName": sess.Get("NAME"),
+			"Data":     data,
 		}, "layout")
 	} else if c.Method() == "POST" {
 		address := model.Address{
@@ -46,7 +52,7 @@ func (route AddAddressRoute) AddUserAddress(c *fiber.Ctx) error {
 			State:   c.FormValue("state"),
 			Pincode: c.FormValue("pincode"),
 		}
-		_, err := route.Service.AddAdress(&address, id)
+		_, err := route.Service.AddAdress(&address, str)
 		if err != nil {
 			return err
 		}

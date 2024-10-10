@@ -1,4 +1,4 @@
-<form action="/addaddress/{{ .Data.Id }}" method="post">
+<form action="/addaddress" method="post">
     <div class="form-group">
         <label for="add1">Address 1</label>
         <input type="text" class="form-control" id="add1" name="add1" placeholder="Enter Address">
@@ -23,7 +23,7 @@
         <label for="pincode">Pincode</label>
         <input type="number" class="form-control" id="pincode" name="pincode" placeholder="Enter Pincode">
     </div>
-    <input type="hidden" name="userid" id="userid" value="{{ .Data.Id }}" />
+    <!-- <input type="hidden" name="userid" id="userid" value="{{ .Data.Id }}" /> -->
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
 <p>

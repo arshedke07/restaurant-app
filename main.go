@@ -49,7 +49,7 @@ func main() {
 	addRestaurant := routes.NewRestaurantRoute(restaurantService, store)
 
 	addressService := services.NewAddressService(&dbconfig)
-	addaddress := routes.NewAddressRoute(addressService, store)
+	addaddress := routes.NewAddressRoute(addressService, store, loginService)
 
 	itemservice := services.NewItemService(&dbconfig)
 	additem := routes.NewItemRoute(itemservice, store, restaurantService)
@@ -81,8 +81,8 @@ func main() {
 	app.Get("/addrestaurant", addRestaurant.AddRestaurant)
 	app.Post("/addrestaurant", addRestaurant.AddRestaurant)
 	app.Get("/myrestaurantpage", addRestaurant.MyRestaurant)
-	app.Get("/addaddress/:id", addaddress.AddUserAddress)
-	app.Post("/addaddress/:id", addaddress.AddUserAddress)
+	app.Get("/addaddress", addaddress.AddUserAddress)
+	app.Post("/addaddress", addaddress.AddUserAddress)
 	app.Get("/addmenuitem", additem.AddItem)
 	app.Post("/addmenuitem", additem.AddItem)
 	app.Get("/mymenupage", additem.MyMenuPage)
